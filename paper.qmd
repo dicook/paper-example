@@ -1,0 +1,96 @@
+---
+title: "This is a sample of writing a paper with Quarto and a journal template"
+author: 
+  - name: Dianne Cook
+    url: https://dicook.org
+    orcid: 0000-0002-3813-7155
+    email: dicook@monash.edu
+    affiliation:
+    - name: Monash University
+      department: Department of Econometrics and Business Statistics
+      city: Melbourne
+      country: Australia
+bibliography: paper.bib
+abstract: Write something useful here
+date: last-modified
+toc: false
+number-sections: true
+latex-clean: true
+format:
+  jasa-pdf:
+    keep-tex: true  
+    journal:
+      blinded: false
+  jasa-html: default
+fig-valign: bottom
+fig-format: png
+cap-location: bottom
+editor_options: 
+  chunk_output_type: console
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+
+# Set function preferences when they exist in multiple packages
+library(conflicted)
+conflict_prefer("filter", "dplyr")
+
+# Set a theme for plots
+# Theme adjustments
+theme_set( theme_gdocs() + 
+             theme(aspect.ratio = 1, 
+                   axis.text.x = element_text(angle = 0, 
+                                              vjust = 1.05, 
+                                              hjust=1),
+                   axis.line.y = element_line(colour = "black"),
+                   palette.colour.continuous = gdocs_pal(),
+                   palette.colour.discrete = gdocs_pal(),
+                   )
+)
+```
+
+## Run some code
+
+## Make a plot
+
+
+## Citations
+
+Here we use a citation to @Patrick2023, or also [@Patrick2023].
+
+Link to figure
+
+## Mathematics uses latex
+
+::: {#prp-metric}
+Let $x,y \in \Psi$ be statistical graphics.
+Let $g: \Psi \xrightarrow{} \mathbb{R}$ be the Euclidean distance between the data of $x$ and $y$ before the aesthetic function, $A$ is applied, such that  $g(x,y) = d(A^{-1}(x), A^{-1}(y))$.
+Let $h: \Psi \xrightarrow{} \mathbb{R}$ be a piecewise distance function that measures the human perception of statistical graphics, defined as:
+$$
+h(x, y) = \begin{cases} 
+      g(x,y) & g(x,y) \geq \epsilon \\
+      0 &  g(x,y) < \epsilon
+   \end{cases}
+$$
+where $\epsilon$ is the JND of our human observer (with $\epsilon>0$).
+$h$ is not a metric.
+:::
+
+::: {.proof}
+Assume ($\Psi$, $h$) is a metric space.
+Let $a,b,c \in \Psi$ be three different visualisations, where $b$ is exactly halfway between $a$ and $c$, such that $g(a, c) =  \epsilon$, $g(a,b) = \frac {1}{2} \epsilon$, and $g(b, c) = \frac {1}{2} \epsilon$.
+Therefore, $h(a, c) =  \epsilon$, $h(a,b) = 0$, and $h(b, c) = 0$.
+As ($\Psi$, $h$) is a metric space, the triangular inequality should hold, and we can state
+$$h(a, c) \leq h(a,b) + h(b, c)$$
+which implies
+$$0 \leq \epsilon$$
+Therefore, by contradiction, $h$ is not a metric.
+:::
